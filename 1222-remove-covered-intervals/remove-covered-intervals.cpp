@@ -1,21 +1,23 @@
 class Solution {
 public:
     int removeCoveredIntervals(vector<vector<int>>& intervals) {
-        //first let do brute force traver all over for each interval 
-        int n=intervals.size();
-        int ans=n;
-        for(int i=0;i<n;i++){
-            int curr_int_start=intervals[i][0];
-            int curr_int_end=intervals[i][1];
-            for(int j=0;j<n;j++){
-                if(i==j)continue;
-                int next_int_start=intervals[j][0];
-                int next_int_end=intervals[j][1];
-
-                //check if the current interval is covered ?
-                if(curr_int_start>=next_int_start && curr_int_end<=next_int_end){ans--;break;}
+       sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
+    if (a[0] == b[0]) {
+        return a[1] > b[1];  
+    }
+    return a[0] < b[0];      
+});
+        int ans=0;
+        int last_end_till_now=-1;
+        //if the lastendtillnow is going to update then that interval is unique 
+        for(int i=0;i<intervals.size();i++)
+        {
+            if(intervals[i][1]>last_end_till_now){
+                ans++;
+                last_end_till_now=intervals[i][1];
             }
         }
+
         return ans;
     }
 };
