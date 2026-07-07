@@ -8,7 +8,7 @@ public:
             n=n/10;
         }
         reverse(num.begin(),num.end());
-        for(auto i:num)cout<<i;
+       // for(auto i:num)cout<<i;
        // return 0;
        vector<int>x;
        long long sum=0;
