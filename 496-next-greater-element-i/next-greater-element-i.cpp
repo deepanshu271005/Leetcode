@@ -26,7 +26,7 @@ public:
             next_greater[s.top()]=-1;
             s.pop();
         }
-          for(auto i:next_greater)cout<<i<<" ";
+          //for(auto i:next_greater)cout<<i<<" ";
 
           vector<int>index_map(1e4+1,-1);
           for(int i=0;i<size2;i++){
