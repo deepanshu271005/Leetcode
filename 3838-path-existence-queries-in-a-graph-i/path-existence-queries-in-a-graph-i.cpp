@@ -35,7 +35,7 @@ public:
            vector<bool>ans;
 
         //now we have the connected component together 
-        for(auto i:queries){
+        for(const auto& i : queries){
              int src=i[0];
              int dest=i[1];
              if(parent[src]==parent[dest])ans.push_back(true);
