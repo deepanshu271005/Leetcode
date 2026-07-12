@@ -1,6 +1,8 @@
 class Solution {
 public:
     int candy(vector<int>& rating) {
+        ios_base::sync_with_stdio(false);
+cin.tie(NULL);
         int n=rating.size();
         int ans=n;
         vector<int>candy(n,1);//given alteast one candy to all 
