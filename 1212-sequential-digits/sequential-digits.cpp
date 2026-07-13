@@ -9,23 +9,27 @@ public:
             int next_digit = i + 1;      // The next digit in the sequence
             
              
-            while (num <= high && next_digit <= 9) {
+            while (num <= 1e9 && next_digit <= 9) {
                  
                 num = num * 10 + next_digit;
                 
                  
-                if (num >= low && num <= high) {
-                    list.push_back(num);
-                }
+                // if (num >= low && num <= high) {
+                //     list.push_back(num);
+                // }
                 
-                
+                 list.push_back(num);
                 next_digit++;
             }
         }
         
        
         sort(list.begin(), list.end());
+        vector<int>ans;
+        for(auto i:list){
+            if(i>=low && i<=high)ans.push_back(i);
+        }
         
-        return list;
+        return ans;;
     }
 };
