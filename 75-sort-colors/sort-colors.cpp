@@ -1,17 +1,30 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        vector<int>ans;
-        for(int i=0;i<nums.size();i++){
-            if(nums[i]==0)ans.push_back(0);
+         
+     int low=0;
+     int mid=0;
+     int high=nums.size()-1;
+
+     //if i found 0 swap with low and inc mid 
+     //if i found 1 just +1 mid 
+     // if i found 2 swap with the high and dont inc the mid 
+
+      while(mid<=high){
+        if(nums[mid]==0){
+            swap(nums[mid],nums[low]);
+            low++;
+            mid++;
         }
-         for(int i=0;i<nums.size();i++){
-            if(nums[i]==1)ans.push_back(1);
+        else if(nums[mid]==1){
+             mid++;
         }
-         for(int i=0;i<nums.size();i++){
-            if(nums[i]==2)ans.push_back(2);
+        else {
+                 swap(nums[high],nums[mid]);
+                 high--;
         }
-        nums=ans;
-        return ; 
+     }
+         
+         return ;
     }
 };
