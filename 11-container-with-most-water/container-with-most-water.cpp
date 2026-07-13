@@ -1,8 +1,12 @@
 class Solution {
 public:
+int init = [] {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    return 0;
+}();
     int maxArea(vector<int>& height) {
-        ios_base::sync_with_stdio(false);
-cin.tie(NULL);
+         
         int maxArea = 0;
         int i = 0, j = height.size() - 1;
 
