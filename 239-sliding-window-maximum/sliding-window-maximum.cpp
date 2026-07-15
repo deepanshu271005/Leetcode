@@ -18,21 +18,22 @@ public:
         map<int, int> m;
         priority_queue<int> pq; // to take care of the max elemnt in the window
         vector<int> ans;
-        while (r < k) {
+        while (r < k-1) {
             if (m[nums[r]] == 0)
                 pq.push(nums[r]);
             m[nums[r]]++;
             r++;
         }
-        while (!pq.empty()) {
-            int top = pq.top();
-            if (m[top] == 0) {
-                pq.pop();
-            } else {
-                ans.push_back(pq.top());
-                break;
-            }
-        }
+        // while (!pq.empty()) {
+        //     int top = pq.top();
+        //     if (m[top] == 0) {
+        //         pq.pop();
+        //     } else {
+        //         ans.push_back(pq.top());
+        //         break;
+        //     }
+        // }
+         
 
         // afet the first while loop exits the value of r=k
         while (r < n) {
