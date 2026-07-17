@@ -9,25 +9,20 @@ public:
 
         */
 
-        vector<long long> length;
+        vector<long long> length(s.size(),0);
         long long curr_length = 0;
-        for (auto i : s) {
-            if (i == '*') {
+       for (int i = 0; i < s.size(); ++i) {
+            if (s[i] == '*') {
                 curr_length--;
-                if (curr_length < 0)
-                    curr_length = 0;
-                length.push_back(curr_length);
-            } else if (i == '%') {
-                length.push_back(curr_length);
-            }
-
-            else if (i == '#') {
+                if (curr_length < 0) curr_length = 0;
+            } else if (s[i] == '%') {
+                // length unchanged
+            } else if (s[i] == '#') {
                 curr_length *= 2;
-                length.push_back(curr_length);
             } else {
                 curr_length++;
-                length.push_back(curr_length);
             }
+            length[i] = curr_length;  
         }
 
         if (length.empty() || k >= length.back()) {
