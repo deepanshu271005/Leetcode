@@ -62,6 +62,6 @@ public:
                 }
             }
         }
-        return '.'; // fallback condition
+        return s[0]; // fallback condition
     }
 };
