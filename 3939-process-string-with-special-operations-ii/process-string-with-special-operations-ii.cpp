@@ -45,7 +45,7 @@ public:
             char operation = s[i];
 
             if (operation == '#') {
-                if (prevLength > 0)
+                 
                     idx = idx % prevLength; // this will take the idx to the
                                             // last index before duplicate
             } else if (operation == '%') {
