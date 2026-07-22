@@ -1,107 +1,104 @@
+class SparseTable {
+private:
+    vector<vector<int>> st;
+
+public:
+    SparseTable(const vector<int>& data) {
+        st.push_back(data);
+        int i = 1, N = st[0].size();
+        while (2 * i <= N + 1) {
+            const auto& pre = st.back();
+            vector<int> cur;
+            for (int j = 0; j < N - 2 * i + 1; j++) {
+                cur.push_back(max(pre[j], pre[j + i]));
+            }
+            st.push_back(cur);
+            i <<= 1;
+        }
+    }
+
+    int query(int begin, int end) {
+        if (begin > end) {
+            return 0;
+        }
+        int len = end - begin + 1;
+        int lg = 0;
+        while ((1 << (lg + 1)) <= len) {
+            lg++;
+        }
+        return max(st[lg][begin], st[lg][end - (1 << lg) + 1]);
+    }
+};
+
 class Solution {
 public:
-    vector<int> maxActiveSectionsAfterTrade(string s, vector<vector<int>>& queries) {
+    vector<int> maxActiveSectionsAfterTrade(string s,
+                                            vector<vector<int>>& queries) {
         int n = s.length();
-        int total_ones = 0;
-        for (char c : s) {
-            if (c == '1') total_ones++;
-        }
-        
-        vector<int> type;
-        vector<int> start;
-        vector<int> end_idx;
-        
-        for (int i = 0; i < n; ) {
-            int j = i;
-            while (j < n && s[j] == s[i]) {
-                j++;
+        int cnt1 = count(s.begin(), s.end(), '1');
+
+        vector<int> zeroBlocks;
+        vector<int> blockLeft;
+        vector<int> blockRight;
+
+        int i = 0;
+        while (i < n) {
+            int st = i;
+            while (i < n && s[i] == s[st]) {
+                i += 1;
             }
-            type.push_back(s[i] - '0');
-            start.push_back(i);
-            end_idx.push_back(j - 1);
-            i = j;
-        }
-        
-        int N = type.size();
-        
-        vector<int> pos_to_seg(n);
-        for (int i = 0; i < N; i++) {
-            for (int j = start[i]; j <= end_idx[i]; j++) {
-                pos_to_seg[j] = i; 
+            if (s[st] == '0') {
+                zeroBlocks.push_back(i - st);
+                blockLeft.push_back(st);
+                blockRight.push_back(i - 1);
             }
         }
-        
-        vector<int> ans(N, 0);
-        for (int i = 1; i < N - 1; i++) {
-            if (type[i] == 1) {
-                ans[i] = (end_idx[i - 1] - start[i - 1] + 1) + (end_idx[i + 1] - start[i + 1] + 1);
-            }
+
+        int m = zeroBlocks.size();
+        if (m < 2) {  // continuous 0 blocks less than 2 segments, return the
+                      // answer directly
+            return vector<int>(queries.size(), cnt1);
         }
-        
-        vector<int> log_table(N + 1, 0);
-        for (int i = 2; i <= N; i++) {
-            log_table[i] = log_table[i / 2] + 1;
+        vector<int> tmpSum(m - 1);
+        for (int i = 0; i < m - 1; i++) {
+            tmpSum[i] = zeroBlocks[i] + zeroBlocks[i + 1];
         }
-        
-        int K = log_table[N] + 1;
-        vector<vector<int>> st(K, vector<int>(N, 0));
-        
-        for (int i = 0; i < N; i++) {
-            st[0][i] = ans[i];
-        }
-        
-        for (int j = 1; j < K; j++) {
-            for (int i = 0; i + (1 << j) <= N; i++) {
-                st[j][i] = max(st[j - 1][i], st[j - 1][i + (1 << (j - 1))]);
-            }
-        }
-        
-        auto queryRMQ = [&](int L_idx, int R_idx) {
-            if (L_idx > R_idx) return 0;
-            int j = log_table[R_idx - L_idx + 1];
-            return max(st[j][L_idx], st[j][R_idx - (1 << j) + 1]);
-        };
-        
-        auto eval = [&](int i, int L, int R, int segL, int segR) {
-            if (i <= segL || i >= segR) return 0;
-            if (type[i] == 0) return 0;
-            
-            int left_len = 0;
-            if (i - 1 == segL) left_len = max(0, end_idx[i - 1] - L + 1);
-            else left_len = end_idx[i - 1] - start[i - 1] + 1;
-            
-            int right_len = 0;
-            if (i + 1 == segR) right_len = max(0, R - start[i + 1] + 1);
-            else right_len = end_idx[i + 1] - start[i + 1] + 1;
-            
-            return left_len + right_len;
-        };
-        
-        vector<int> res;
-        
+        SparseTable st(tmpSum);
+        vector<int> ans;
+
         for (const auto& q : queries) {
-            int L = q[0];
-            int R = q[1];
-            
-            int segL = pos_to_seg[L];
-            int segR = pos_to_seg[R];
-            
-            if (segR - segL < 2) {
-                res.push_back(total_ones);
+            int l = q[0], r = q[1];
+            int i = lower_bound(blockRight.begin(), blockRight.end(), l) -
+                    blockRight.begin();
+            int j = upper_bound(blockLeft.begin(), blockLeft.end(), r) -
+                    blockLeft.begin() - 1;
+
+            // at most 1 continuous block of 0s within the substring
+            if (i > m - 1 || j < 0 || i >= j) {
+                ans.push_back(cnt1);
                 continue;
             }
-            
-            int max_gain = 0;
-            max_gain = max(max_gain, eval(segL + 1, L, R, segL, segR));
-            max_gain = max(max_gain, eval(segR - 1, L, R, segL, segR));
-            
-            if (segL + 2 <= segR - 2) {
-                max_gain = max(max_gain, queryRMQ(segL + 2, segR - 2));
+
+            int firstLen = blockRight[i] - max(blockLeft[i], l) +
+                           1;  // actual length of the first consecutive block
+                               // of 0s in the substring
+            int lastLen = min(blockRight[j], r) - blockLeft[j] +
+                          1;  // actual length of the last consecutive block of
+                              // 0s in the substring
+            // exactly 2 consecutive 0 blocks within the substring
+            if (i + 1 == j) {
+                int bestGain = firstLen + lastLen;
+                ans.push_back(cnt1 + bestGain);
+                continue;
             }
-            
-            res.push_back(total_ones + max_gain);
+
+            int val1 = firstLen + zeroBlocks[i + 1];
+            int val2 = zeroBlocks[j - 1] + lastLen;
+            int val3 = st.query(i + 1, j - 2);
+            int bestGain = max({val1, val2, val3});
+            ans.push_back(cnt1 + bestGain);
         }
-        
-        return res;
+
+        return ans;
     }
 };
