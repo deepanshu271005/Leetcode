@@ -13,7 +13,7 @@ public:
          }
          else {
             //odd
-            mid=((size+1)/2)-1;
+            mid=((size+1)/2) ;
          }
        string ans(size,'0');
        int l=0,r=size-1;
@@ -38,7 +38,7 @@ public:
                 int cnt=i.second;
                 while(cnt){
                     if(cnt%2){
-                        ans[mid]=c;
+                        ans[mid-1]=c;
                         cnt--;
                     }
                  else  { ans[l]=c;
