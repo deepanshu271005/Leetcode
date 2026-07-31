@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minimumPushes(string word) {
-        map<char,int>m;
+        unordered_map<char,int>m;
         for(auto i:word){
             m[i]++;
         }
