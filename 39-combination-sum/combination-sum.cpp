@@ -1,18 +1,19 @@
 class Solution {
 public:
-    void f(vector<int>& candidates, int target, set<vector<int>>& s,
+    void f(vector<int>& candidates, int target, vector<vector<int>>& ans,
            int idx, vector<int>& temp, int currsum) {
         if (currsum == target) {
-            s.insert(temp);
+            ans.push_back(temp);
+            return;
         }
         if (currsum > target || idx >= candidates.size())
             return;
 
         // explore the possibilty to add this number again ;
         temp.push_back(candidates[idx]);
-        f(candidates, target, s, idx, temp, currsum + candidates[idx]);
+        f(candidates, target, ans, idx, temp, currsum + candidates[idx]);
         temp.pop_back();
-        f(candidates, target, s, idx+1, temp, currsum );
+        f(candidates, target, ans, idx+1, temp, currsum );
         return;
     }
 
@@ -24,10 +25,8 @@ public:
         vector<vector<int>> ans;
         set<vector<int>> s;
         vector<int>temp;
-        f(candidates, target, s, 0,temp, 0);
-        for(auto i:s){
-            ans.push_back(i);
-        }
+        f(candidates, target, ans, 0,temp, 0);
+        
         return ans;
     }
 };
