@@ -1,7 +1,8 @@
 class Solution {
 public:
     bool validRow(vector<string>& board, int row) {
-        if (row < 0 || row >= board.size()) return false;
+        if (row < 0 || row >= board.size())
+            return false;
         for (int i = 0; i < board[0].size(); i++) {
             if (board[row][i] == 'Q')
                 return false;
@@ -9,7 +10,8 @@ public:
         return true;
     }
     bool validCol(vector<string>& board, int col) {
-        if (col < 0 || col >= board.size()) return false;
+        if (col < 0 || col >= board.size())
+            return false;
         for (int i = 0; i < board.size(); i++) {
             if (board[i][col] == 'Q')
                 return false;
@@ -47,7 +49,7 @@ public:
     }
 
     bool check(vector<string>& board, int x, int y) {
-        if (validRow(board,x) && validCol(board, y) &&
+        if (validRow(board, x) && validCol(board, y) &&
             validCross(board, x, y)) {
             return true;
         }
@@ -72,7 +74,7 @@ public:
         // cout<<endl;
         // cout<<endl;
 
-        for (int i = x+1; i < n; i++) {
+        for (int i = x + 1; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (i == x && j == y)
                     continue;
@@ -104,9 +106,9 @@ public:
         // cout<<endl;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                board[i][j]='Q';
-                backtrack(board,i,j,n-1,ans);
-                board[i][j]='.';
+                board[i][j] = 'Q';
+                backtrack(board, i, j, n - 1, ans);
+                board[i][j] = '.';
             }
         }
 
