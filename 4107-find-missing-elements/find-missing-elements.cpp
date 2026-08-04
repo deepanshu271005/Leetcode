@@ -4,10 +4,10 @@ public:
         sort(nums.begin(),nums.end());
         int cnt=nums[0];
         vector<int>ans;
-       map<int,int>m;
-      for(auto i:nums)m[i]++;
+       vector<int>freq(101,0);
+      for(auto i:nums)freq[i]++;
         while(cnt<=nums[nums.size()-1]){
-            if(m.count(cnt)==0){
+            if(freq[cnt]==0){
                 ans.push_back(cnt);
             }
             cnt++;
