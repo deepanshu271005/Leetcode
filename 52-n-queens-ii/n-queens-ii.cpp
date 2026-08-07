@@ -2,9 +2,9 @@ class Solution {
 public:
  void backtrack(vector<string>& board, int row, int n, 
                    vector<bool>& cols, vector<bool>& antiDiag, vector<bool>& mainDiag, 
-                   vector<vector<string>>& ans) {
+                   int&ans) {
          if (row == n) {
-            ans.push_back(board);
+            ans++;
             return;
         }
 
@@ -30,7 +30,7 @@ public:
         }
     }
     int totalNQueens(int n) {
-        vector<vector<string>> ans;
+        int ans=0;
         vector<string> board(n, string(n, '.'));
         
          vector<bool> cols(n, false);
@@ -39,6 +39,6 @@ public:
 
          backtrack(board, 0, n, cols, antiDiag, mainDiag, ans);
 
-        return ans.size();
+        return ans ;
     }
 };
