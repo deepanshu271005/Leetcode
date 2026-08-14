@@ -25,7 +25,6 @@ public:
          for(int i=2;i<n;i++){
             if(s[i]=='(')continue;
             else{
-            
              int cnt=1;
              for(int j=i-1;j>=0;j--){
                // cout<<"aua";
