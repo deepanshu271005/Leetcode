@@ -5,7 +5,7 @@ public:
       // sort(citations.begin(),citations.end());
          int best=0;
          int n=citations.size();
-         for(int curr=1;curr<=1000;curr++){
+         for(int curr=1;curr<=n;curr++){
             int cnt=0;
             for(auto i:citations){
                 if(i>=curr)cnt++;
