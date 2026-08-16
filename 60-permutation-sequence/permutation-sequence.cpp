@@ -32,9 +32,24 @@ public:
         }
         //   for(auto i:s)cout<<s;
         //   cout<<endl;
-        f(n, s, curr, store, visited, 0);
-        //  for(auto i:store)cout<<i;
 
-        return store[k - 1];
+       vector<int>factorial(10);
+       factorial[0]=factorial[1]=1;
+       for(int i=2;i<10;i++){
+        factorial[i]=factorial[i-1]*i;
+       }
+
+       int per=0;
+       int i=1;
+       while(true){
+          per+=factorial[n-1];
+          if(per>=k){per-=factorial[n-1];break;}
+          i++;
+       }
+
+        f(n, s, curr, store, visited, i-1);
+       //   for(auto i:store)cout<<i<<endl;
+          k-=per;
+        return store[k-1];
     }
 };
