@@ -1,7 +1,8 @@
 class Solution {
 public:
     void f(int n, string& s, string& curr, vector<string>& store,
-           vector<bool>& visited, int idx) {
+           vector<bool>& visited, int idx,int k) {
+            if(store.size()>=k)return;
         if (curr.size() == n) {
             store.push_back(curr);
             return;
@@ -12,11 +13,11 @@ public:
         if (visited[idx] == false) {
             visited[idx] = true;
             curr.push_back(s[idx]);
-            f(n, s, curr, store, visited, 0);
+            f(n, s, curr, store, visited, 0,k);
             visited[idx] = false;
             curr.pop_back();
         }
-        f(n, s, curr, store, visited, idx + 1);
+        f(n, s, curr, store, visited, idx + 1,k);
         return;
     }
 
@@ -46,10 +47,10 @@ public:
           if(per>=k){per-=factorial[n-1];break;}
           i++;
        }
-
-        f(n, s, curr, store, visited, i-1);
+           k-=per;
+        f(n, s, curr, store, visited, i-1,k);
        //   for(auto i:store)cout<<i<<endl;
-          k-=per;
+         
         return store[k-1];
     }
 };
