@@ -14,11 +14,11 @@ public:
         for(auto i:m)
         {
            int row=i.first;
-           vector<int>con=i.second;
+           
            
             //as the group can only sit at positon 2345 or 4567 or 6789 then now 
             int mask=0;
-            for(auto i:con){
+            for(auto i:i.second){
                mask= mask|(1<<i);
             }
             // cout<<endl;
