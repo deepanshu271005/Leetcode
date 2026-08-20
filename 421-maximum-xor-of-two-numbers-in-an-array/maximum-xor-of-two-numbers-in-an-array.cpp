@@ -86,6 +86,8 @@ class Solution {
   
 public:
     int findMaximumXOR(vector<int>& nums) {
+         std::ios_base::sync_with_stdio(false);
+        std::cin.tie(NULL);
         tries t;
         for(auto i:nums){
             t.insert(i);
