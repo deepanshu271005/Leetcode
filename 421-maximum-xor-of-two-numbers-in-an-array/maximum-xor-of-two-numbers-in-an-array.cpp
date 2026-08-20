@@ -94,7 +94,7 @@ public:
        int ans=0;
        for(int i=0;i<nums.size();i++){
            ans=max(ans,t.maxor(nums[i]));
-           cout<<t.maxor(nums[i])<<" "<<nums[i]<<endl;
+        //    cout<<t.maxor(nums[i])<<" "<<nums[i]<<endl;
        }
      return ans;
     }
