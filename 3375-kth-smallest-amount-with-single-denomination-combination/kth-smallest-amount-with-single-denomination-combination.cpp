@@ -6,7 +6,7 @@ public:
      } 
       
 
-       bool f(long long m,vector<int>&coins,int k){
+       bool f(long long m,vector<int>&coins,int k,vector<long long>&pre){
        
          long long total=0;
         //  for(int i=0;i<coins.size();i++){
@@ -17,22 +17,7 @@ public:
        
           for(int mask=1;mask<tmask;mask++){
 
-            long long lcm=1;
-            int cnt=0;
-            for(int i=0;i<coins.size();i++){
-                if((1<<i)&mask){
-                    lcm=LCM(coins[i],lcm);
-                    cnt++;
-                }
-            }
-            if(cnt%2){
-                total+=m/lcm;
-            }
-            else {
-                total-=m/lcm;
-            }
-
-
+             total+=m/pre[mask];
           }
 
             return total>=k;
@@ -42,11 +27,34 @@ public:
        //apply binary search on ans;
        long long l=0,r=1e18;
        long long ans=0;
+       int tmask=1<<coins.size();
+
+        vector<long long>pre(tmask);
+
+        for(int mask=1;mask<(1<<coins.size());mask++){
+
+            long long lcm=1;
+            int cnt=0;
+            for(int i=0;i<coins.size();i++){
+                if((1<<i)&mask){
+                    lcm=LCM(coins[i],lcm);
+                    cnt++;
+                }
+            }
+            if(cnt%2){
+                pre[mask] =lcm;
+            }
+            else {
+                pre[mask]-=lcm;
+            }
+
+          }
+    
        
         while(l<=r){
              long long m=l+(r-l)/2;
 
-              if(f(m,coins,k)){
+              if(f(m,coins,k,pre)){
                 ans=m;
                 r=m-1;
               }
