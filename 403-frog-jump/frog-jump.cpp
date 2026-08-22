@@ -24,16 +24,21 @@ public:
         //      }
         //      return false;
 
-         vector<unordered_set<int>>dp(n,unordered_set<int>());
+         vector<vector<int>>dp(n,vector<int>());
          //dp[i]->able to reach stone [i] with steps = dp[i]=k;
 
-         dp[0].insert(0);
+         dp[0].push_back(0);
          for(int i=1;i<n;i++){
            for(int j=i-1;j>=0 ;j--){
             int k=stones[i]-stones[j];
+            auto it=lower_bound(dp[i].begin(),dp[i].end(),k);
+            if(it!=dp[i].end() && dp[i][it-dp[i].begin()]==k){
+                 continue;
+            }
             for(auto k1:dp[j]){
                 if(k1==k || k1==k-1 || ((k==INT_MAX)?false:k1==k+1)){
-                    dp[i].insert(k);
+                    dp[i].push_back(k);
+                    break;
                 }
              }
              }
