@@ -24,7 +24,7 @@ public:
         //      }
         //      return false;
 
-         vector<set<int>>dp(n,set<int>());
+         vector<unordered_set<int>>dp(n,unordered_set<int>());
          //dp[i]->able to reach stone [i] with steps = dp[i]=k;
 
          dp[0].insert(0);
