@@ -4,7 +4,7 @@ public:
         priority_queue<long long,vector<long long >,greater<long long>>pq;
         pq.push(1);
         set<int>s;
-        while(s.size()<=n){
+        while(s.size()<n){
             long long i=pq.top();
             pq.pop();
             if(s.find(i)!=s.end()){continue;}
@@ -13,7 +13,7 @@ public:
             pq.push(5*i);
             s.insert(i);
         }
-        auto it=--s.rbegin();
+        auto it=s.rbegin();
         return *it;
 
     }
