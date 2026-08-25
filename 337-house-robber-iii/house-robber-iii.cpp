@@ -16,6 +16,7 @@ public:
         dp; // fisrt int is the dp[0]state and the second one is the dp[1]
             // adjacent looted state
     void f(TreeNode* root) {
+        if(dp.find(root)!=dp.end())return;
         if (root == NULL) {
             dp[root] = {0, 0};
             return;
