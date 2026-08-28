@@ -45,9 +45,10 @@ public:
                     it++;
                 }
             }
-            if (curr->f){
-                curr->f=false;
-                return true;}
+            if (curr->f) {
+                curr->f = false;
+                return true;
+            }
             return false;
         }
 
@@ -86,7 +87,7 @@ public:
                 // expoling this path is valid
                 visited[nx][ny] = 1;
                 curr += board[nx][ny];
-                f(nx, ny, visited, ans, t, curr,board);
+                f(nx, ny, visited, ans, t, curr, board);
                 visited[nx][ny] = 0;
                 curr.pop_back();
             }
@@ -114,12 +115,12 @@ public:
         for (int i = 0; i < n; i++) {
 
             for (int j = 0; j < m; j++) {
-                string temp = ""; 
-                temp+=board[i][j];
+                string temp = "";
+                temp += board[i][j];
                 if (t->checkpath(temp)) {
                     visited[i][j] = 1;
-                    f(i, j, visited, ans, t, temp,board);
-                    visited[i][j]=0;
+                    f(i, j, visited, ans, t, temp, board);
+                    visited[i][j] = 0;
                 }
             }
         }
