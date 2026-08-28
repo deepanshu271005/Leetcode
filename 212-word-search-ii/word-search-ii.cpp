@@ -46,7 +46,47 @@ public:
                 }
             }
             if (curr->f) {
-                curr->f = false;
+                curr->f = false; // Unmark the current word
+
+                // 1. If this node has other children, we can't delete it. Just
+                // return.
+                for (auto i : curr->store) {
+                    if (i != NULL) {
+                        return true;
+                    }
+                }
+
+                // 2. Top-to-bottom deletion: Find the lowest node we CANNOT
+                // delete
+                Node* newcurr = root;
+                Node* lastBranchNode = root;
+                int severIndex = s[0] - 'a';
+                int it = 0;
+
+                while (it < s.size()) {
+                    // Count how many active branches this current node has
+                    int activeBranches = 0;
+                    for (int i = 0; i < 26; i++) {
+                        if (newcurr->store[i] != NULL) {
+                            activeBranches++;
+                        }
+                    }
+
+                    // If it has multiple branches OR it's the end of another
+                    // valid word, we cannot delete it. The cut must happen
+                    // AFTER this node.
+                    if (activeBranches > 1 ||
+                        (newcurr->f == true && newcurr != root)) {
+                        lastBranchNode = newcurr;
+                        severIndex = s[it] - 'a';
+                    }
+
+                    newcurr = newcurr->store[s[it] - 'a'];
+                    it++;
+                }
+
+                // 3. Sever the path at the correct junction
+                lastBranchNode->store[severIndex] = NULL;
                 return true;
             }
             return false;
