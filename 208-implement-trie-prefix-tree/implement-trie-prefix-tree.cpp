@@ -13,11 +13,11 @@ public:
       }
 
     };
-    Node*root;
+    Node*root=new Node();
   
     Trie() {
        
-        root=new Node();
+        
         
     }
     
