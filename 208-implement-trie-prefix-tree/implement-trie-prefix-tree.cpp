@@ -51,7 +51,7 @@ public:
     
     bool startsWith(string prefix) {
          Node*curr=root;
-        for(auto i:prefix){
+        for(auto &i:prefix){
             if(curr->store[i-'a']!=NULL){
                 curr=curr->store[i-'a'];
             }
