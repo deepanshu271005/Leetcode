@@ -38,7 +38,7 @@ public:
     
     bool search(string word) {
           Node*curr=root;
-        for(auto i:word){
+        for(auto &i:word){
             if(curr->store[i-'a']!=NULL){
                 curr=curr->store[i-'a'];
             }
