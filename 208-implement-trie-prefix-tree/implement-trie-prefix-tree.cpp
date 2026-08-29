@@ -3,11 +3,11 @@ public:
  
     class Node{
       public:
-      vector<Node*>store;
+     Node*store[26];
       bool f;
 
     Node(){
-         store.resize(26);
+         
          for(int i=0;i<26;i++)store[i]=NULL;
          f=false;
       }
