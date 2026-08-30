@@ -18,14 +18,14 @@ public:
     }
     sort(nums.begin(),nums.end());
         vector<int> LIS;
-        for (auto i : nums) {
+        for (auto & i : nums) {
             LIS.push_back(-1*i[1]);
         }
         vector<int> tail;
 
-        for (auto i : LIS) {
+        for (auto & i : LIS) {
 
-            auto it = lower_bound(tail.begin(), tail.end(), i);
+            auto  it = lower_bound(tail.begin(), tail.end(), i);
             if (it == tail.end())
                 tail.push_back(i);
             else
