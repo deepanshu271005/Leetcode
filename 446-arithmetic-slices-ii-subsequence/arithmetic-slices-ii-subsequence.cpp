@@ -2,7 +2,7 @@ class Solution {
 public:
     int numberOfArithmeticSlices(vector<int>& nums) {
         int n=nums.size();
-        vector<map<long long,int>>dp(n);
+        vector<unordered_map<long long,int>>dp(n);
         //so now dp[i]->stores the diff,len in the map 
         //dp[i][j]=x so it define that upto i index and j diff if we want there is len x available 
         
