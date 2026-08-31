@@ -11,28 +11,33 @@
 class Solution {
 public:
     vector<int> nodesBetweenCriticalPoints(ListNode* head) {
-        vector<int>nodes;
+        // vector<int>nodes;
         ListNode*curr1=head;
+        int cnt=0;
         while(curr1!=NULL){
-            nodes.push_back(curr1->val);
+            // nodes.push_back(curr1->val);
+            // curr1=curr1->next;
+            cnt++;
             curr1=curr1->next;
         }
 
-       if(nodes.size()==2)return {-1,-1};
-       int pre=0;
-       int curr=1;
-       int next=2;
+       if(cnt==2)return {-1,-1};
+       ListNode* pre=head;
+       ListNode *curr=head->next;
+       ListNode* next=head->next->next;
+       int idx=1;
        vector<int>critical;
-       while(next<nodes.size()){
-        if (nodes[curr]<nodes[pre]&& nodes[curr]<nodes[next]){
-            critical.push_back(curr);
+       while(idx+1<cnt){
+        if ( curr->val > pre->val && curr->val > next->val ){
+            critical.push_back(idx);
         }
-        else if (nodes[curr]>nodes[pre]&& nodes[curr]>nodes[next]){
-            critical.push_back(curr);
+        else if (curr->val < pre->val && curr->val < next->val){
+            critical.push_back(idx);
         }
-        pre++;
-        curr++;
-        next++;
+        pre=pre->next;
+        curr=curr->next;
+        next=next->next;
+        idx++;
        }
  
       if(critical.size()<2){
