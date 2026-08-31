@@ -22,7 +22,7 @@ public:
 
         for(int i=2;i<=n;i++){
             for(int j=2;j<=k;j++){
-                if(j>i)break;
+               // if(j>i)break;
                 for(int cut=1;cut<=i;cut++){
                     dp[i][j]= min(dp[i][j],max(dp[cut][j-1],prefix[i]-prefix[cut]));
                 }
