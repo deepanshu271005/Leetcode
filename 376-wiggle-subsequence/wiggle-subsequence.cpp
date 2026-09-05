@@ -11,7 +11,7 @@ public:
           for(int j=i-1;j>=0;j--){
             int diff=nums[i]-nums[j];
             if(diff==0)continue;//skip if two number are the same
-            if(diff>=0){
+            if(diff>0){
                 dp1[i]=max(dp1[i],1+dp2[j]);
             }
             else if(diff<0){
