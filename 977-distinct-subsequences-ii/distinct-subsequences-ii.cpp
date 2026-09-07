@@ -34,18 +34,19 @@ public:
 
         int n = s.size();
         vector<int> last_data(26, 0);
-        // basecase
+        // base case
         last_data[s[0] - 'a'] = 1;
         int sum = 1;
         for (int i = 1; i < n; i++) {
             int store = last_data[s[i] - 'a'];
             last_data[s[i] - 'a'] = (sum + 1) % MOD;
             sum = ((long long)sum + last_data[s[i] - 'a'] - store % MOD + MOD) %
-                  MOD;
+                  MOD;// add the net diff in the sum as sum is the current or running sum;
         }
-        int ans = 0;
-        for (auto i : last_data)
-            ans = (ans + i) % MOD;
-        return ans;
+        // int ans = 0;
+        // for (auto i : last_data)
+        //     ans = (ans + i) % MOD;
+        // return ans;
+        return sum;
     }
 };
