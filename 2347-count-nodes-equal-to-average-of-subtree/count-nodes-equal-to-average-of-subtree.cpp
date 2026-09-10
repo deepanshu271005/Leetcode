@@ -24,7 +24,7 @@ public:
  
     int averageOfSubtree(TreeNode* root) {
         int cnt=0;
-         f(root,cnt);
+        f(root,cnt);
         return cnt;
     }
 };
