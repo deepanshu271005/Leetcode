@@ -1,7 +1,7 @@
 class Solution {
 public:
       
-     string f(string&s,int &idx,string curr){
+     string f(string&s,int &idx,string &curr){
       
       while(idx<s.size())
    {
