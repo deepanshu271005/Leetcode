@@ -13,7 +13,6 @@ public:
 
       else if(s[idx]==')'){
           reverse(curr.begin(),curr.end());
-          idx;
           break;
       }
 
