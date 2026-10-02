@@ -21,7 +21,7 @@ public:
         if (catP == ratP)
             return 2; // Cat wins
             
-        // Return exactly what was computed
+         
         if (dp[ratP][catP][turn][steps] != -1)
             return dp[ratP][catP][turn][steps]; 
 
@@ -29,7 +29,7 @@ public:
             // Rat moves
             bool candraw = false;
             for (auto i : graph[ratP]) {
-                state newstate = {i, catP, 1, steps + 1}; // fixed typo here
+                state newstate = {i, catP, 1, steps + 1};  
                 int temp = dfs(newstate, dp, graph);
                 
                 // Rat takes a guaranteed win immediately
