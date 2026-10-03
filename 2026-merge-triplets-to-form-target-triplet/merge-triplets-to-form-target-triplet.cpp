@@ -9,7 +9,7 @@ public:
             int a = i[0];
             int b = i[1];
             int c = i[2];
-            cout << ca << cb << cc <<" "<<ta<<tb<<tc<<endl;
+            //cout << ca << cb << cc <<" "<<ta<<tb<<tc<<endl;
             if (ca == ta && cb == tb && cc == tc)
                 return true;
 
@@ -27,7 +27,7 @@ public:
                 cb = max(b, cb);
             }
         }
-        cout << ca << cb << cc <<" "<<ta<<tb<<tc;
+       // cout << ca << cb << cc <<" "<<ta<<tb<<tc;
         if (ca == ta && cb == tb && cc == tc)
             return true;
 
