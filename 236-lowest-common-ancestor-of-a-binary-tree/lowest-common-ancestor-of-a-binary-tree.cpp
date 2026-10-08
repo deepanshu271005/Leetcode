@@ -65,8 +65,6 @@ public:
 
         // so all the parent storing is done
 
-       
-
         int diff = abs(depth[q] - depth[p]);
         if (depth[p] > depth[q]) {
 
@@ -85,17 +83,17 @@ public:
             }
         }
 
-      // now both the p and q will be n the same level 
-      if(p==q)return q;
+        // now both the p and q will be n the same level
+        if (p == q)
+            return q;
 
-      for(int i=LOG-1;i>=0;i--){
-        //check for the farthest parent that is not similar 
-        if(dp[p][i]!=dp[q][i]){
-            p=dp[p][i];
-            q=dp[q][i];
+        for (int i = LOG - 1; i >= 0; i--) {
+            // check for the farthest parent that is not similar
+            if (dp[p][i] != dp[q][i]) {
+                p = dp[p][i];
+                q = dp[q][i];
+            }
         }
-      }
-     return dp[p][0];
-
+        return dp[p][0];
     }
 };
