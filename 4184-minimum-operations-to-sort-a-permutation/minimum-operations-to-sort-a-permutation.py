@@ -1,5 +1,5 @@
 class Solution:
-    def minOperations(self, nums) -> int:
+    def minOperations(self, nums):
         n = len(nums)
         idx = nums.index(0)
         
