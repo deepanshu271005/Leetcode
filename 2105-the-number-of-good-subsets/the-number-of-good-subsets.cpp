@@ -18,6 +18,7 @@ public:
         // the PF of them should conatin each prime only one
         // dp[i][mask]-> tell me the number of subsets ending at i having the
         // prime factor as mask 2 3 5 7 11 13 17 19 23 29    10->prime
+        //dp[x][mask] = Number of valid subsets formed using numbers from 2 through x, having prime-factor mask equal to mask.
         int tmask = (1 << 10);
         int n = nums.size();
         int MOD = 1e9 + 7;
