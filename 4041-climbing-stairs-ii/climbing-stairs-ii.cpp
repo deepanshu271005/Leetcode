@@ -3,6 +3,7 @@ public:
     int climbStairs(int n, vector<int>& cost) {
         
         vector<int>dp(n+1,-1);
+        dp[0]=0;
         //if a stair in unreachable it is -1 
         for(int i=1;i<=n;i++){
             int ans=INT_MAX;
@@ -25,7 +26,7 @@ public:
             else dp[i]=ans;
         }
 
-        return dp[n]+1;
+        return dp[n];
 
     }
 };
